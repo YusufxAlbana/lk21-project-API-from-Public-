@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import Hero from '../components/Hero';
 import GenreTags from '../components/GenreTags';
 import MovieGrid from '../components/MovieGrid';
+import FloatingSearch from '../components/FloatingSearch';
 
 function Home() {
     const [searchParams] = useSearchParams();
@@ -12,7 +13,7 @@ function Home() {
     const [currentEndpoint, setCurrentEndpoint] = useState('latest');
     const [loading, setLoading] = useState(false);
     const [activeGenre, setActiveGenre] = useState('all');
-    const [sectionTitle, setSectionTitle] = useState('Latest Updates');
+    const [sectionTitle, setSectionTitle] = useState('Film Terbaru');
 
     const API_BASE = '/api/v1';
 
@@ -76,7 +77,7 @@ function Home() {
     const filterMovies = (query) => {
         if (!query) {
             setMovies(allMovies);
-            setSectionTitle('Latest Updates');
+            setSectionTitle('Film Terbaru');
             return;
         }
 
@@ -113,6 +114,7 @@ function Home() {
 
     return (
         <>
+            <FloatingSearch />
             <Hero />
             <main className="container">
                 <section id="latest-section">

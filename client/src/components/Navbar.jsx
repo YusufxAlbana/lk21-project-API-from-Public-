@@ -23,6 +23,19 @@ function Navbar() {
             <div className="logo" onClick={() => navigate('/')}>
                 <Logo size={80} />
             </div>
+
+            <div className="nav-links">
+                <a href="/" className="nav-link">
+                    <i className="fas fa-home"></i> Home
+                </a>
+                <a href="/films" className="nav-link">
+                    <i className="fas fa-film"></i> Film
+                </a>
+                <a href="/contact" className="nav-link">
+                    <i className="fas fa-envelope"></i> Kontak
+                </a>
+            </div>
+
             <div className="search-container">
                 <input
                     type="text"

@@ -73,9 +73,8 @@ function DetailPage() {
     const watchLink = movie.downloadLink || movie.streamLink || '#';
     const trailerUrl = movie.trailerUrl || '';
 
-    // Extract year from title
+    // Extract year from title (but don't display it)
     const yearMatch = fullTitle.match(/\((\d{4})\)/);
-    const year = yearMatch ? yearMatch[1] : null;
     let cleanTitle = yearMatch ? fullTitle.replace(/\s*\(\d{4}\)/, '') : fullTitle;
 
     // Extract subtitle info
@@ -116,30 +115,11 @@ function DetailPage() {
 
                     <div className="detail-info">
                         <h1 className="detail-title">{title}</h1>
-                        {(year || subtitle) && (
+                        {subtitle && (
                             <div className="detail-year-subtitle-wrapper">
-                                {year && (
-                                    <div className="detail-year">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                                            <line x1="16" y1="2" x2="16" y2="6" />
-                                            <line x1="8" y1="2" x2="8" y2="6" />
-                                            <line x1="3" y1="10" x2="21" y2="10" />
-                                            <line x1="8" y1="14" x2="8" y2="14" />
-                                            <line x1="12" y1="14" x2="12" y2="14" />
-                                            <line x1="16" y1="14" x2="16" y2="14" />
-                                            <line x1="8" y1="18" x2="8" y2="18" />
-                                            <line x1="12" y1="18" x2="12" y2="18" />
-                                            <line x1="16" y1="18" x2="16" y2="18" />
-                                        </svg>
-                                        {year}
-                                    </div>
-                                )}
-                                {subtitle && (
-                                    <div className="detail-subtitle">
-                                        <i className="fas fa-closed-captioning"></i> {subtitle}
-                                    </div>
-                                )}
+                                <div className="detail-subtitle">
+                                    <i className="fas fa-closed-captioning"></i> {subtitle}
+                                </div>
                             </div>
                         )}
 
