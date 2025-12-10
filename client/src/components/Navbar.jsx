@@ -1,8 +1,18 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 
 function Navbar() {
     const navigate = useNavigate();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
 
     return (
         <nav className="navbar">
@@ -10,20 +20,31 @@ function Navbar() {
                 <Logo size={80} />
             </div>
 
-            <div className="nav-links">
-                <a href="/" className="nav-link">
+            {/* Hamburger Menu Button */}
+            <button className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            {/* Navigation Links */}
+            <div className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+                <a href="/" className="nav-link" onClick={closeMenu}>
                     <i className="fas fa-home"></i> Home
                 </a>
-                <a href="/films" className="nav-link">
+                <a href="/films" className="nav-link" onClick={closeMenu}>
                     <i className="fas fa-film"></i> Film
                 </a>
-                <a href="/about" className="nav-link">
+                <a href="/about" className="nav-link" onClick={closeMenu}>
                     <i className="fas fa-info-circle"></i> About
                 </a>
-                <a href="/contact" className="nav-link">
+                <a href="/contact" className="nav-link" onClick={closeMenu}>
                     <i className="fas fa-user"></i> Contact
                 </a>
             </div>
+
+            {/* Overlay for mobile menu */}
+            {isMenuOpen && <div className="nav-overlay" onClick={closeMenu}></div>}
         </nav>
     );
 }
