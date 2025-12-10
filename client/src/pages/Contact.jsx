@@ -5,37 +5,31 @@ function Contact() {
         {
             name: 'GitHub',
             icon: 'fab fa-github',
-            link: 'https://github.com/yourusername',
+            link: 'https://github.com/YusufxAlbana',
             description: 'Check out my code repositories and open source contributions'
         },
         {
             name: 'Instagram',
             icon: 'fab fa-instagram',
-            link: 'https://instagram.com/yourusername',
+            link: 'https://www.instagram.com/yusuf_nawaf_alacehi',
             description: 'Follow my daily activities and tech journey'
         },
         {
             name: 'Facebook',
             icon: 'fab fa-facebook',
-            link: 'https://facebook.com/yourusername',
+            link: 'https://www.facebook.com/profile.php?id=100090587091557',
             description: 'Connect with me on Facebook'
         },
         {
             name: 'LinkedIn',
             icon: 'fab fa-linkedin',
-            link: 'https://linkedin.com/in/yourusername',
+            link: 'https://www.linkedin.com/in/yusuf-nawaf-albana-1b493931b/',
             description: 'View my professional profile and experience'
-        },
-        {
-            name: 'Twitter',
-            icon: 'fab fa-twitter',
-            link: 'https://twitter.com/yourusername',
-            description: 'Follow my tech thoughts and updates'
         },
         {
             name: 'Email',
             icon: 'fas fa-envelope',
-            link: 'mailto:your.email@example.com',
+            link: 'mailto:your.yusufnawafalbana2009@gmail.com',
             description: 'Send me an email directly'
         }
     ];

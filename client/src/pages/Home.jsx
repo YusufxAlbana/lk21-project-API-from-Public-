@@ -114,9 +114,9 @@ function Home() {
 
     return (
         <>
-            <FloatingSearch />
             <Hero />
             <main className="container">
+                <FloatingSearch />
                 <section id="latest-section">
                     <div className="section-header">
                         <h2>{sectionTitle}</h2>

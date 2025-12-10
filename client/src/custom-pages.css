@@ -1,39 +1,49 @@
-/* Custom Search Bar on Films Page */
+/* Custom Search Bar - Right Side, Scrolls with Content, Gray Theme */
 .custom-search-wrapper {
-    position: fixed;
-    top: 90px;
-    left: 0;
-    width: 100%;
-    z-index: 90;
-    padding: 2rem 4%;
-    background: linear-gradient(to bottom, var(--dark) 0%, transparent 100%);
-    animation: fadeInDown 0.5s ease;
+    position: relative;
+    max-width: 320px;
+    margin: 1.5rem 0 1.5rem auto;
+    z-index: 10;
+    padding: 0;
+    animation: fadeInRight 0.5s ease;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .custom-search-bar {
-    max-width: 600px;
-    margin: 0 auto;
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 0;
-    background: var(--dark-grey);
+    background: rgba(40, 44, 52, 0.95);
     border-radius: 50px;
-    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    padding: 0.4rem 0.4rem 0.4rem 1.2rem;
+    border: 2px solid rgba(255, 255, 255, 0.15);
     transition: all 0.4s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
 }
 
 .custom-search-bar.focused {
-    border-color: var(--primary);
-    box-shadow: 0 8px 30px rgba(212, 160, 23, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
     transform: translateY(-2px);
 }
 
 .search-icon-wrapper {
-    color: var(--primary);
-    font-size: 1.2rem;
-    margin-right: 1rem;
+    color: #aaa;
+    font-size: 1.1rem;
+    margin-right: 0.8rem;
     display: flex;
     align-items: center;
 }
@@ -44,34 +54,34 @@
     border: none;
     outline: none;
     color: var(--white);
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-family: 'Outfit', sans-serif;
-    padding: 0.75rem 0;
+    padding: 0.6rem 0;
 }
 
 .search-input::placeholder {
-    color: var(--light-grey);
+    color: #888;
 }
 
 .search-btn {
-    background: var(--primary);
+    background: #555;
     border: none;
-    color: var(--dark);
-    width: 50px;
-    height: 50px;
+    color: #fff;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .search-btn:hover {
-    background: #f5c842;
+    background: #777;
     transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(212, 160, 23, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* About Page */
@@ -364,17 +374,17 @@
 /* Responsive */
 @media (max-width: 768px) {
     .custom-search-wrapper {
-        padding: 1.5rem 4%;
-        top: 80px;
+        max-width: 100%;
+        margin: 1rem 0;
     }
 
     .custom-search-bar {
-        padding: 0.4rem 0.4rem 0.4rem 1rem;
+        padding: 0.3rem 0.3rem 0.3rem 1rem;
     }
 
     .search-btn {
-        width: 45px;
-        height: 45px;
+        width: 38px;
+        height: 38px;
     }
 
     .about-header h1 {
