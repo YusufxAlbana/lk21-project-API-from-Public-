@@ -6,6 +6,7 @@ import v1API from "#routes/api/v1/index";
 
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -30,16 +31,27 @@ app.get("/status", async (req, res) => {
 });
 
 // Serve React build files (production)
-app.use(express.static(path.join(__dirname, "client", "dist")));
+const distPath = path.join(__dirname, "client", "dist");
 
-// Fallback: serve React app for all other routes (SPA routing)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
+// Check if dist folder exists
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+  
+  // Fallback: serve React app for all other routes (SPA routing)
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+}
 
+// For local development
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`API endpoint: http://localhost:${PORT}/api/v1`);
-  console.log(`Frontend: http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`API endpoint: http://localhost:${PORT}/api/v1`);
+    console.log(`Frontend: http://localhost:${PORT}`);
+  });
+}
+
+// Export for Vercel serverless
+export default app;
