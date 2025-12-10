@@ -3,36 +3,35 @@ import { useNavigate } from 'react-router-dom';
 
 function FloatingSearch() {
     const [searchQuery, setSearchQuery] = useState('');
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
     const navigate = useNavigate();
 
-    const handleSearch = () => {
+    const handleSearch = (e) => {
+        e.preventDefault();
         if (searchQuery.trim()) {
             navigate(`/films?search=${encodeURIComponent(searchQuery)}`);
-            setIsExpanded(false);
-        }
-    };
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleSearch();
         }
     };
 
     return (
-        <div className={`floating-search ${isExpanded ? 'expanded' : ''}`}>
-            <input
-                type="text"
-                placeholder="Search movies..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyPress={handleKeyPress}
-                onFocus={() => setIsExpanded(true)}
-                onBlur={() => setTimeout(() => setIsExpanded(false), 200)}
-            />
-            <button onClick={handleSearch}>
-                <i className="fas fa-search"></i>
-            </button>
+        <div className="custom-search-wrapper">
+            <form className={`custom-search-bar ${isFocused ? 'focused' : ''}`} onSubmit={handleSearch}>
+                <div className="search-icon-wrapper">
+                    <i className="fas fa-search"></i>
+                </div>
+                <input
+                    type="text"
+                    placeholder="Cari film favorit Anda..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
+                    className="search-input"
+                />
+                <button type="submit" className="search-btn">
+                    <i className="fas fa-arrow-right"></i>
+                </button>
+            </form>
         </div>
     );
 }

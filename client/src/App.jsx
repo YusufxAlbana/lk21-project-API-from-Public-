@@ -3,6 +3,7 @@ import Landing from './pages/Landing';
 import Home from './pages/Home';
 import DetailPage from './pages/DetailPage';
 import Contact from './pages/Contact';
+import About from './pages/About';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/films" element={<Home />} />
         <Route path="/detail" element={<DetailPage />} />
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />

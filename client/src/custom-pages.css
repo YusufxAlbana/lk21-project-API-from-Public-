@@ -1,0 +1,399 @@
+/* Custom Search Bar on Films Page */
+.custom-search-wrapper {
+    position: fixed;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    z-index: 90;
+    padding: 2rem 4%;
+    background: linear-gradient(to bottom, var(--dark) 0%, transparent 100%);
+    animation: fadeInDown 0.5s ease;
+}
+
+.custom-search-bar {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--dark-grey);
+    border-radius: 50px;
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.custom-search-bar.focused {
+    border-color: var(--primary);
+    box-shadow: 0 8px 30px rgba(212, 160, 23, 0.3);
+    transform: translateY(-2px);
+}
+
+.search-icon-wrapper {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--white);
+    font-size: 1rem;
+    font-family: 'Outfit', sans-serif;
+    padding: 0.75rem 0;
+}
+
+.search-input::placeholder {
+    color: var(--light-grey);
+}
+
+.search-btn {
+    background: var(--primary);
+    border: none;
+    color: var(--dark);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.search-btn:hover {
+    background: #f5c842;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(212, 160, 23, 0.4);
+}
+
+/* About Page */
+.about-page {
+    min-height: 100vh;
+    padding: 120px 4% 4rem;
+    background: linear-gradient(135deg, var(--dark) 0%, #1a2a3f 100%);
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    animation: fadeInUp 0.6s ease;
+}
+
+.about-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.2) 0%, rgba(212, 160, 23, 0.05) 100%);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--primary);
+    margin: 0 auto 2rem;
+}
+
+.about-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.about-subtitle {
+    font-size: 1.2rem;
+    color: var(--light-grey);
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.about-card {
+    background: var(--dark-grey);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.8s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 40px rgba(212, 160, 23, 0.2);
+}
+
+.about-card .card-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.2) 0%, rgba(212, 160, 23, 0.05) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.about-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.about-card p {
+    color: var(--light-grey);
+    line-height: 1.8;
+}
+
+.disclaimer-section {
+    margin-top: 3rem;
+}
+
+.disclaimer-box {
+    background: rgba(244, 67, 54, 0.1);
+    border: 2px solid rgba(244, 67, 54, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.disclaimer-box i {
+    font-size: 2rem;
+    color: #ff6b6b;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+.disclaimer-box h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: var(--white);
+}
+
+.disclaimer-box p {
+    color: var(--light-grey);
+    line-height: 1.8;
+}
+
+/* Updated Contact Page (Portfolio) */
+.profile-section {
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.2) 0%, rgba(212, 160, 23, 0.05) 100%);
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: var(--primary);
+    margin: 0 auto 2rem;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 4rem 0;
+}
+
+.social-card {
+    background: var(--dark-grey);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s ease;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.social-card:hover::before {
+    left: 100%;
+}
+
+.social-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 40px rgba(212, 160, 23, 0.2);
+}
+
+.social-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.2) 0%, rgba(212, 160, 23, 0.05) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.social-card:hover .social-icon {
+    transform: scale(1.1) rotate(5deg);
+    background: linear-gradient(135deg, rgba(212, 160, 23, 0.3) 0%, rgba(212, 160, 23, 0.1) 100%);
+}
+
+.social-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--white);
+}
+
+.social-card p {
+    color: var(--light-grey);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.card-arrow {
+    color: var(--primary);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.social-card:hover .card-arrow {
+    transform: translateX(5px);
+}
+
+.portfolio-info {
+    background: var(--dark-grey);
+    padding: 3rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 3rem;
+}
+
+.portfolio-info h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    text-align: center;
+}
+
+.portfolio-info p {
+    color: var(--light-grey);
+    line-height: 1.8;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+}
+
+.skills-section {
+    margin-top: 2rem;
+}
+
+.skills-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    text-align: center;
+}
+
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.skill-tag {
+    background: rgba(212, 160, 23, 0.1);
+    border: 1px solid var(--primary);
+    color: var(--white);
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.skill-tag i {
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.skill-tag:hover {
+    background: rgba(212, 160, 23, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(212, 160, 23, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .custom-search-wrapper {
+        padding: 1.5rem 4%;
+        top: 80px;
+    }
+
+    .custom-search-bar {
+        padding: 0.4rem 0.4rem 0.4rem 1rem;
+    }
+
+    .search-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .about-header h1 {
+        font-size: 2rem;
+    }
+
+    .about-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+    }
+
+    .social-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 4rem;
+    }
+}

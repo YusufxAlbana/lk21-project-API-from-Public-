@@ -1,22 +1,8 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 
 function Navbar() {
-    const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
-
-    const handleSearch = () => {
-        if (searchQuery.trim()) {
-            navigate(`/?search=${encodeURIComponent(searchQuery)}`);
-        }
-    };
-
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-            handleSearch();
-        }
-    };
 
     return (
         <nav className="navbar">
@@ -31,22 +17,12 @@ function Navbar() {
                 <a href="/films" className="nav-link">
                     <i className="fas fa-film"></i> Film
                 </a>
-                <a href="/contact" className="nav-link">
-                    <i className="fas fa-envelope"></i> Kontak
+                <a href="/about" className="nav-link">
+                    <i className="fas fa-info-circle"></i> About
                 </a>
-            </div>
-
-            <div className="search-container">
-                <input
-                    type="text"
-                    placeholder="Search movies..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                />
-                <button onClick={handleSearch}>
-                    <i className="fas fa-search"></i>
-                </button>
+                <a href="/contact" className="nav-link">
+                    <i className="fas fa-user"></i> Contact
+                </a>
             </div>
         </nav>
     );
