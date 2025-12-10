@@ -12,7 +12,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.use(cors({ origin: "*" }));
 app.set("json spaces", 2);
-app.use(express.static(path.join(__dirname, "public")));
+
+// API routes first
+app.use("/api/v1", v1API);
 
 app.get("/status", async (req, res) => {
   try {
@@ -27,10 +29,17 @@ app.get("/status", async (req, res) => {
   }
 });
 
-app.use("/api/v1", v1API);
+// Serve React build files (production)
+app.use(express.static(path.join(__dirname, "client", "dist")));
+
+// Fallback: serve React app for all other routes (SPA routing)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
   console.log(`API endpoint: http://localhost:${PORT}/api/v1`);
+  console.log(`Frontend: http://localhost:${PORT}`);
 });
