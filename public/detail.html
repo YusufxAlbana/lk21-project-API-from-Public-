@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Detail - LK21 Vibe</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo" onclick="window.location.href='/'">
+            <img src="logo.png" alt="LK21 Vibe" style="height: 40px; margin-right: 10px; vertical-align: middle;">
+            LK21<span>Vibe</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search movies...">
+            <button id="searchBtn"><i class="fas fa-search"></i></button>
+        </div>
+    </nav>
+
+    <main class="detail-container">
+        <div class="detail-loading">
+            <div class="loading-spinner"></div>
+        </div>
+        
+        <div id="detailContent" class="detail-content" style="display: none;">
+            <!-- Content will be injected here -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 LK21 Vibe. For educational purposes only.</p>
+    </footer>
+
+    <script src="detail.js"></script>
+</body>
+</html>

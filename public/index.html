@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LK21 Vibe - Premium Movie Stream</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="LK21 Vibe" style="height: 40px; margin-right: 10px; vertical-align: middle;">
+            LK21<span>Vibe</span>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search movies...">
+            <button id="searchBtn"><i class="fas fa-search"></i></button>
+        </div>
+    </nav>
+
+    <header class="hero" id="hero">
+        <div class="hero-content">
+            <h1>Discover Infinite Entertainment</h1>
+            <p>Stream the latest movies and series in HD.</p>
+        </div>
+        <div class="hero-overlay"></div>
+    </header>
+
+    <main class="container">
+        <section id="latest-section">
+            <div class="section-header">
+                <h2>Latest Updates</h2>
+                <div class="tags-container">
+                    <div class="tags">
+                        <span class="tag active">All</span>
+                        <span class="tag">Action</span>
+                        <span class="tag">Adventure</span>
+                        <span class="tag">Animation</span>
+                        <span class="tag">Biography</span>
+                        <span class="tag">Comedy</span>
+                        <span class="tag">Crime</span>
+                        <span class="tag">Documentary</span>
+                        <span class="tag">Drama</span>
+                        <span class="tag">Family</span>
+                        <span class="tag">Fantasy</span>
+                        <span class="tag">History</span>
+                        <span class="tag">Horror</span>
+                        <span class="tag">Music</span>
+                        <span class="tag">Mystery</span>
+                        <span class="tag">Romance</span>
+                        <span class="tag">Sci-Fi</span>
+                        <span class="tag">Sport</span>
+                        <span class="tag">Thriller</span>
+                        <span class="tag">War</span>
+                        <span class="tag">Western</span>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-grid" id="movieGrid">
+                <!-- Movies will be loaded here -->
+                <div class="loading-spinner"></div>
+            </div>
+            
+            <div class="load-more-container">
+                <button id="loadMoreBtn" class="primary-btn">Load More Movies</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Movie Detail Modal -->
+    <div id="movieModal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="closeModal" class="close-btn">&times;</button>
+            <div id="modalBody" class="modal-body">
+                <!-- Content injected via JS -->
+                 <div class="loading-spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 LK21 Vibe. For educational purposes only.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
