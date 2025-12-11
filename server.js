@@ -58,7 +58,7 @@ app.get("*", (req, res) => {
 });
 
 // For local development
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5173;
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
