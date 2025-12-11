@@ -63,7 +63,6 @@ if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
     console.log(`API endpoint: http://localhost:${PORT}/api/v1`);
-    console.log(`Frontend: http://localhost:${PORT}`);
   });
 }
 

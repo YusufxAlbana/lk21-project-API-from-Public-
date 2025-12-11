@@ -1,6 +1,11 @@
 {
     "version": 2,
+    "buildCommand": "npm run vercel-build",
     "builds": [
+        {
+            "src": "client/dist/**",
+            "use": "@vercel/static"
+        },
         {
             "src": "server.js",
             "use": "@vercel/node"
@@ -8,8 +13,24 @@
     ],
     "routes": [
         {
-            "src": "/(.*)",
+            "src": "/api/(.*)",
             "dest": "/server.js"
+        },
+        {
+            "src": "/status",
+            "dest": "/server.js"
+        },
+        {
+            "src": "/assets/(.*)",
+            "dest": "/client/dist/assets/$1"
+        },
+        {
+            "src": "/(.*\\.(js|css|ico|png|jpg|jpeg|svg|webp|woff|woff2|map))",
+            "dest": "/client/dist/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/client/dist/index.html"
         }
     ]
 }
