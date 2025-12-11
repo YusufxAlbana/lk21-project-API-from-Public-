@@ -33,15 +33,22 @@ app.get("/status", async (req, res) => {
 // Serve React build files (production)
 const distPath = path.join(__dirname, "client", "dist");
 
-// Check if dist folder exists
-if (fs.existsSync(distPath)) {
-  app.use(express.static(distPath));
-  
-  // Fallback: serve React app for all other routes (SPA routing)
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(distPath, "index.html"));
-  });
-}
+// Always set up static file serving - Vercel builds the client first
+app.use(express.static(distPath));
+
+// Fallback: serve React app for all other routes (SPA routing)
+app.get("*", (req, res) => {
+  const indexPath = path.join(distPath, "index.html");
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).json({ 
+      error: "Frontend not built", 
+      hint: "Run 'npm run build' first",
+      distPath: distPath 
+    });
+  }
+});
 
 // For local development
 const PORT = process.env.PORT || 8000;

@@ -32,13 +32,26 @@ const getMovieData = ({ htmlCode }) => {
   movieCards.forEach((movie) => {
     try {
         const titleEl = movie.querySelector("h3.poster-title");
-        const title = titleEl ? titleEl.textContent.trim() : "Unknown Title";
+        const title = titleEl ? titleEl.textContent.trim() : "";
 
-        const posterEl = movie.querySelector("img");
-        const poster = posterEl ? posterEl.getAttribute("src") : "";
+        // Try multiple ways to get poster image
+        let poster = "";
+        // First try: img tag directly
+        const imgEl = movie.querySelector("img");
+        if (imgEl) {
+            poster = imgEl.getAttribute("src") || "";
+        }
+        // Second try: picture > source with srcset
+        if (!poster) {
+            const sourceEl = movie.querySelector("picture source");
+            if (sourceEl) {
+                poster = sourceEl.getAttribute("srcset") || "";
+            }
+        }
 
-        const ratingEl = movie.querySelector(".rating");
-        const rating = ratingEl ? ratingEl.textContent.trim() : "N/A";
+        // Get rating from the span with itemprop="ratingValue"
+        const ratingValueEl = movie.querySelector('span[itemprop="ratingValue"]');
+        const rating = ratingValueEl ? ratingValueEl.textContent.trim() : "N/A";
 
         const qualityEl = movie.querySelector(".label");
         const quality = qualityEl ? qualityEl.textContent.trim() : "HD";
@@ -52,13 +65,14 @@ const getMovieData = ({ htmlCode }) => {
         // Construct a logical options object for frontend compatibility
         const options = {
             name: title,
-            url: href.startsWith("http") ? href : `https://lk21.de${href}`
+            url: href.startsWith("http") ? href : `https://tv7.lk21official.cc${href}`
         };
         
         // Use the movie page URL as the "downloadLink" for now
         const downloadLink = options.url;
 
-        if (title && poster) {
+        // Only require title to be present - poster might be lazy loaded
+        if (title) {
              result.push({ title, poster, rating, quality, categories, downloadLink, options });
         }
     } catch (e) {
@@ -70,3 +84,4 @@ const getMovieData = ({ htmlCode }) => {
 };
 
 export default getMovieData;
+
