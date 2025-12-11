@@ -12,22 +12,44 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
-        <a href="/" class="logo">
-            <svg width="40" height="40" viewBox="0 0 50 50">
-                <rect width="50" height="50" rx="10" fill="#D4A017"/>
-                <rect x="8" y="12" width="34" height="26" rx="3" fill="#0A1A2F"/>
-                <circle cx="16" cy="18" r="3" fill="#D4A017"/>
-                <circle cx="16" cy="32" r="3" fill="#D4A017"/>
-                <polygon points="22,17 38,25 22,33" fill="#D4A017"/>
+        <div class="logo" onclick="location.href='/'">
+            <!-- Logo SVG (same as React) -->
+            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+                <circle cx="50" cy="50" r="48" fill="url(#goldGradient)" opacity="0.1"/>
+                <g transform="translate(20, 25)">
+                    <path d="M 5 10 L 55 2 L 55 12 L 5 20 Z" fill="url(#goldGradient)" stroke="#D4A017" stroke-width="1"/>
+                    <rect x="10" y="4" width="8" height="14" fill="#0A1A2F" opacity="0.6" transform="skewY(-8)"/>
+                    <rect x="25" y="2" width="8" height="14" fill="#0A1A2F" opacity="0.6" transform="skewY(-8)"/>
+                    <rect x="40" y="0" width="8" height="14" fill="#0A1A2F" opacity="0.6" transform="skewY(-8)"/>
+                    <rect x="5" y="20" width="50" height="35" rx="3" fill="#1a1a1a" stroke="url(#goldGradient)" stroke-width="2"/>
+                    <g transform="translate(30, 37.5)">
+                        <circle cx="0" cy="0" r="10" fill="url(#goldGradient)" opacity="0.2"/>
+                        <path d="M -3 -5 L -3 5 L 5 0 Z" fill="#D4A017"/>
+                    </g>
+                    <line x1="10" y1="28" x2="50" y2="28" stroke="#D4A017" stroke-width="0.5" opacity="0.3"/>
+                    <line x1="10" y1="47" x2="50" y2="47" stroke="#D4A017" stroke-width="0.5" opacity="0.3"/>
+                </g>
+                <defs>
+                    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#FFD700"/>
+                        <stop offset="50%" stop-color="#D4A017"/>
+                        <stop offset="100%" stop-color="#FFA500"/>
+                    </linearGradient>
+                </defs>
             </svg>
-            <span>LK21 Vibe</span>
-        </a>
-        <div class="nav-links">
-            <a href="/" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links" id="navLinks">
+            <a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a>
             <a href="/films.html" class="nav-link"><i class="fas fa-film"></i> Film</a>
             <a href="/about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
             <a href="/contact.html" class="nav-link"><i class="fas fa-user"></i> Contact</a>
         </div>
+        <div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
     </nav>
 
     <!-- Hero Section -->
@@ -39,59 +61,60 @@
         </div>
     </section>
 
-    <!-- Floating Search -->
-    <div class="floating-search" id="floatingSearch">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="searchInput" placeholder="Cari film favorit Anda..." 
-               onfocus="expandSearch()" onblur="collapseSearch()">
-        <button onclick="searchMovies()" class="search-btn">
-            <i class="fas fa-arrow-right"></i>
-        </button>
-    </div>
-
     <!-- Main Content -->
     <main class="container">
+        <!-- Custom Search Bar (same as React FloatingSearch) -->
+        <div class="custom-search-wrapper">
+            <form class="custom-search-bar" id="searchForm" onsubmit="handleSearch(event)">
+                <div class="search-icon-wrapper">
+                    <i class="fas fa-search"></i>
+                </div>
+                <input type="text" id="searchInput" placeholder="Cari film favorit Anda..." class="search-input">
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
         <section id="latest-section">
             <div class="section-header">
-                <h2 id="sectionTitle">Film Terbaru</h2>
+                <h2 id="sectionTitle">Latest Updates</h2>
                 <div class="tags-container">
                     <div class="tags" id="genreTags">
-                        <span class="tag active" onclick="loadMovies('latest')">All</span>
-                        <span class="tag" onclick="loadByGenre('action')">Action</span>
-                        <span class="tag" onclick="loadByGenre('adventure')">Adventure</span>
-                        <span class="tag" onclick="loadByGenre('animation')">Animation</span>
-                        <span class="tag" onclick="loadByGenre('biography')">Biography</span>
-                        <span class="tag" onclick="loadByGenre('comedy')">Comedy</span>
-                        <span class="tag" onclick="loadByGenre('crime')">Crime</span>
-                        <span class="tag" onclick="loadByGenre('drama')">Drama</span>
-                        <span class="tag" onclick="loadByGenre('horror')">Horror</span>
-                        <span class="tag" onclick="loadByGenre('romance')">Romance</span>
-                        <span class="tag" onclick="loadByGenre('sci-fi')">Sci-Fi</span>
-                        <span class="tag" onclick="loadByGenre('thriller')">Thriller</span>
+                        <span class="tag active" onclick="handleGenreChange('all')">All</span>
+                        <span class="tag" onclick="handleGenreChange('action')">Action</span>
+                        <span class="tag" onclick="handleGenreChange('adventure')">Adventure</span>
+                        <span class="tag" onclick="handleGenreChange('animation')">Animation</span>
+                        <span class="tag" onclick="handleGenreChange('biography')">Biography</span>
+                        <span class="tag" onclick="handleGenreChange('comedy')">Comedy</span>
+                        <span class="tag" onclick="handleGenreChange('crime')">Crime</span>
+                        <span class="tag" onclick="handleGenreChange('drama')">Drama</span>
+                        <span class="tag" onclick="handleGenreChange('horror')">Horror</span>
+                        <span class="tag" onclick="handleGenreChange('romance')">Romance</span>
+                        <span class="tag" onclick="handleGenreChange('sci-fi')">Sci-Fi</span>
+                        <span class="tag" onclick="handleGenreChange('thriller')">Thriller</span>
                     </div>
                 </div>
             </div>
 
             <!-- Movie Grid -->
             <div class="movie-grid" id="movieGrid">
-                <!-- Movies loaded here -->
+                <!-- Loading Spinner -->
+                <div class="loading-spinner" id="loadingSpinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
             </div>
 
-            <!-- Loading State -->
-            <div class="loading-spinner" id="loadingState" style="display: none;">
-                <i class="fas fa-spinner fa-spin"></i>
-            </div>
-
-            <!-- Empty State -->
-            <div class="no-results" id="emptyState" style="display: none;">
+            <!-- No Results -->
+            <div class="no-results" id="noResults" style="display: none;">
                 <i class="fas fa-search"></i>
                 <h3>No movies found matching your search</h3>
                 <p>Try different keywords or browse all movies</p>
             </div>
 
-            <!-- Load More -->
+            <!-- Load More Button -->
             <div class="load-more-container" id="loadMoreContainer">
-                <button class="primary-btn" id="loadMoreBtn" onclick="loadMore()">
+                <button id="loadMoreBtn" class="primary-btn" onclick="handleLoadMore()">
                     Load More Movies
                 </button>
             </div>
@@ -102,13 +125,6 @@
     <footer>
         <p>&copy; 2025 LK21 Vibe. For educational purposes only.</p>
     </footer>
-
-    <!-- Movie Detail Modal -->
-    <div class="modal-overlay" id="movieModal">
-        <div class="modal-content" id="modalContent">
-            <!-- Modal content loaded here -->
-        </div>
-    </div>
 
     <script src="/js/app.js"></script>
 </body>
