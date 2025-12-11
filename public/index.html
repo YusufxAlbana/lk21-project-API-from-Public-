@@ -13,8 +13,7 @@
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="logo" onclick="location.href='/'">
-            <!-- Logo SVG (same as React) -->
-            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="50" cy="50" r="48" fill="url(#goldGradient)" opacity="0.1"/>
                 <g transform="translate(20, 25)">
                     <path d="M 5 10 L 55 2 L 55 12 L 5 20 Z" fill="url(#goldGradient)" stroke="#D4A017" stroke-width="1"/>
@@ -26,8 +25,6 @@
                         <circle cx="0" cy="0" r="10" fill="url(#goldGradient)" opacity="0.2"/>
                         <path d="M -3 -5 L -3 5 L 5 0 Z" fill="#D4A017"/>
                     </g>
-                    <line x1="10" y1="28" x2="50" y2="28" stroke="#D4A017" stroke-width="0.5" opacity="0.3"/>
-                    <line x1="10" y1="47" x2="50" y2="47" stroke="#D4A017" stroke-width="0.5" opacity="0.3"/>
                 </g>
                 <defs>
                     <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -39,9 +36,7 @@
             </svg>
         </div>
         <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </button>
         <div class="nav-links" id="navLinks">
             <a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a>
@@ -52,80 +47,169 @@
         <div class="nav-overlay" id="navOverlay" onclick="closeMenu()"></div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>Premium Movie Streaming</h1>
-            <p>Temukan film favorit Anda dengan kualitas terbaik. Streaming gratis tanpa batas.</p>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Custom Search Bar (same as React FloatingSearch) -->
-        <div class="custom-search-wrapper">
-            <form class="custom-search-bar" id="searchForm" onsubmit="handleSearch(event)">
-                <div class="search-icon-wrapper">
-                    <i class="fas fa-search"></i>
-                </div>
-                <input type="text" id="searchInput" placeholder="Cari film favorit Anda..." class="search-input">
-                <button type="submit" class="search-btn">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-            </form>
-        </div>
-
-        <section id="latest-section">
-            <div class="section-header">
-                <h2 id="sectionTitle">Latest Updates</h2>
-                <div class="tags-container">
-                    <div class="tags" id="genreTags">
-                        <span class="tag active" onclick="handleGenreChange('all')">All</span>
-                        <span class="tag" onclick="handleGenreChange('action')">Action</span>
-                        <span class="tag" onclick="handleGenreChange('adventure')">Adventure</span>
-                        <span class="tag" onclick="handleGenreChange('animation')">Animation</span>
-                        <span class="tag" onclick="handleGenreChange('biography')">Biography</span>
-                        <span class="tag" onclick="handleGenreChange('comedy')">Comedy</span>
-                        <span class="tag" onclick="handleGenreChange('crime')">Crime</span>
-                        <span class="tag" onclick="handleGenreChange('drama')">Drama</span>
-                        <span class="tag" onclick="handleGenreChange('horror')">Horror</span>
-                        <span class="tag" onclick="handleGenreChange('romance')">Romance</span>
-                        <span class="tag" onclick="handleGenreChange('sci-fi')">Sci-Fi</span>
-                        <span class="tag" onclick="handleGenreChange('thriller')">Thriller</span>
+    <!-- Landing Page -->
+    <div class="landing-page">
+        <!-- Hero Section -->
+        <section class="landing-hero">
+            <div class="landing-hero-overlay"></div>
+            <div class="landing-hero-content">
+                <div class="landing-hero-text">
+                    <h1 class="landing-title">
+                        Selamat Datang di <span class="highlight">LK21 Vibe</span>
+                    </h1>
+                    <p class="landing-subtitle">
+                        Streaming film terbaru dengan kualitas HD.
+                        Nikmati koleksi film pilihan dengan rating terbaik.
+                    </p>
+                    <div class="landing-cta-buttons">
+                        <button class="cta-primary" onclick="location.href='/films.html'">
+                            <i class="fas fa-film"></i> Jelajahi Semua Film
+                        </button>
+                        <button class="cta-secondary" onclick="window.scrollTo({ top: 600, behavior: 'smooth' })">
+                            <i class="fas fa-star"></i> Lihat Top 10
+                        </button>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Movie Grid -->
-            <div class="movie-grid" id="movieGrid">
-                <!-- Loading Spinner -->
-                <div class="loading-spinner" id="loadingSpinner">
-                    <i class="fas fa-spinner fa-spin"></i>
+        <!-- Top 10 Movies Section -->
+        <section class="top-movies-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2><i class="fas fa-trophy"></i> Top 10 Film Terbaik</h2>
+                    <p class="section-description">Film-film dengan rating tertinggi pilihan pengguna</p>
+                </div>
+
+                <div class="top-movies-grid" id="topMoviesGrid">
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+
+                <div class="view-all-container">
+                    <button class="view-all-btn" onclick="location.href='/films.html'">
+                        Lihat Semua Film <i class="fas fa-arrow-right"></i>
+                    </button>
                 </div>
             </div>
+        </section>
 
-            <!-- No Results -->
-            <div class="no-results" id="noResults" style="display: none;">
-                <i class="fas fa-search"></i>
-                <h3>No movies found matching your search</h3>
-                <p>Try different keywords or browse all movies</p>
-            </div>
-
-            <!-- Load More Button -->
-            <div class="load-more-container" id="loadMoreContainer">
-                <button id="loadMoreBtn" class="primary-btn" onclick="handleLoadMore()">
-                    Load More Movies
-                </button>
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h3>Kualitas HD</h3>
+                        <p>Streaming dengan kualitas video terbaik untuk pengalaman menonton maksimal</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h3>Film Terbaru</h3>
+                        <p>Koleksi film terbaru dari berbagai genre yang terus diperbarui</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Update Rutin</h3>
+                        <p>Film-film yang baru rilis langsung tersedia dengan subtitle berkualitas</p>
+                    </div>
+                </div>
             </div>
         </section>
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 LK21 Vibe. For educational purposes only.</p>
     </footer>
 
-    <script src="/js/app.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar?.classList.add('scrolled');
+            } else {
+                navbar?.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        function toggleMenu() {
+            document.getElementById('hamburger')?.classList.toggle('active');
+            document.getElementById('navLinks')?.classList.toggle('active');
+            document.getElementById('navOverlay')?.classList.toggle('active');
+        }
+        function closeMenu() {
+            document.getElementById('hamburger')?.classList.remove('active');
+            document.getElementById('navLinks')?.classList.remove('active');
+            document.getElementById('navOverlay')?.classList.remove('active');
+        }
+
+        // Fetch top movies
+        async function fetchTopMovies() {
+            try {
+                const response = await fetch('/api/v1/latest?page=1');
+                const data = await response.json();
+                
+                let movies = data.data || data.result || [];
+                
+                // Sort by rating and get top 10
+                const topMovies = movies
+                    .filter(m => m.rating && m.rating !== 'N/A' && parseFloat(m.rating) > 0)
+                    .sort((a, b) => parseFloat(b.rating || 0) - parseFloat(a.rating || 0))
+                    .slice(0, 10);
+                
+                renderTopMovies(topMovies);
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('topMoviesGrid').innerHTML = '<div class="no-results"><i class="fas fa-film"></i><h3>Belum ada data</h3><p>Film sedang dimuat, silakan refresh halaman</p></div>';
+            }
+        }
+
+        function renderTopMovies(movies) {
+            const grid = document.getElementById('topMoviesGrid');
+            if (movies.length === 0) {
+                grid.innerHTML = '<div class="no-results"><i class="fas fa-film"></i><h3>Belum ada data</h3><p>Film sedang dimuat, silakan refresh halaman</p></div>';
+                return;
+            }
+            
+            grid.innerHTML = movies.map((movie, index) => {
+                const title = movie.title || movie.options?.name || 'Unknown';
+                const poster = movie.poster || 'https://via.placeholder.com/300x450';
+                const rating = movie.rating || 'N/A';
+                const quality = movie.quality || 'HD';
+                const url = movie.options?.url || '#';
+                
+                return `
+                    <div class="top-movie-item">
+                        <div class="rank-badge">#${index + 1}</div>
+                        <div class="movie-card" onclick="location.href='/detail.html?url=${encodeURIComponent(url)}'">
+                            <div class="poster-wrapper">
+                                <img src="${poster}" alt="${title}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x450'">
+                            </div>
+                            <div class="movie-info">
+                                <h3 class="movie-title" title="${title}">${title}</h3>
+                                <div class="movie-meta">
+                                    <span class="quality">${quality}</span>
+                                    <span class="rating-badge"><i class="fas fa-star"></i> ${rating}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', fetchTopMovies);
+    </script>
 </body>
 </html>
