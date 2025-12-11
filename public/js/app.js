@@ -17,6 +17,8 @@ const sectionTitle = document.getElementById('sectionTitle');
 const searchInput = document.getElementById('searchInput');
 const movieModal = document.getElementById('movieModal');
 const modalContent = document.getElementById('modalContent');
+const floatingSearch = document.getElementById('floatingSearch');
+const navbar = document.getElementById('navbar');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,7 +33,34 @@ document.addEventListener('DOMContentLoaded', () => {
     movieModal?.addEventListener('click', (e) => {
         if (e.target === movieModal) closeModal();
     });
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar?.classList.add('scrolled');
+        } else {
+            navbar?.classList.remove('scrolled');
+        }
+    });
+    
+    // ESC to close modal
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
 });
+
+// Expand/Collapse search
+function expandSearch() {
+    floatingSearch?.classList.add('expanded');
+}
+
+function collapseSearch() {
+    setTimeout(() => {
+        if (!searchInput?.value) {
+            floatingSearch?.classList.remove('expanded');
+        }
+    }, 200);
+}
 
 // Load movies
 async function loadMovies(endpoint, page = 1, reset = true) {
@@ -45,11 +74,9 @@ async function loadMovies(endpoint, page = 1, reset = true) {
     }
     
     try {
-        const url = endpoint.includes('/') 
-            ? `${API_BASE}/${endpoint}?page=${page}`
-            : `${API_BASE}/${endpoint}?page=${page}`;
-        
+        const url = `${API_BASE}/${endpoint}?page=${page}`;
         console.log('Fetching:', url);
+        
         const response = await fetch(url);
         const data = await response.json();
         
@@ -65,11 +92,8 @@ async function loadMovies(endpoint, page = 1, reset = true) {
         currentEndpoint = endpoint;
         currentPage = page;
         
-        // Update section title
         updateSectionTitle(endpoint);
-        
-        // Show/hide load more
-        loadMoreContainer.style.display = movies.length > 0 ? 'block' : 'none';
+        loadMoreContainer.style.display = movies.length > 0 ? 'flex' : 'none';
         
     } catch (error) {
         console.error('Error fetching movies:', error);
@@ -84,15 +108,15 @@ async function loadMovies(endpoint, page = 1, reset = true) {
 function renderMovies(movies, append = false) {
     if (!movies || movies.length === 0) {
         if (!append) {
-            emptyState.classList.remove('hidden');
+            emptyState.style.display = 'block';
             loadMoreContainer.style.display = 'none';
         }
         return;
     }
     
-    emptyState.classList.add('hidden');
+    emptyState.style.display = 'none';
     
-    const html = movies.map(movie => createMovieCard(movie)).join('');
+    const html = movies.map((movie, index) => createMovieCard(movie, index)).join('');
     
     if (append) {
         movieGrid.innerHTML += html;
@@ -102,44 +126,28 @@ function renderMovies(movies, append = false) {
 }
 
 // Create movie card HTML
-function createMovieCard(movie) {
+function createMovieCard(movie, index) {
     const title = movie.title || movie.options?.name || 'Unknown';
     const poster = movie.poster || 'https://via.placeholder.com/300x450?text=No+Image';
     const rating = movie.rating || 'N/A';
     const quality = movie.quality || 'HD';
     const categories = movie.categories || '';
-    const url = movie.downloadLink || movie.options?.url || '#';
+    
+    const movieData = encodeURIComponent(JSON.stringify(movie));
+    const delay = Math.min(index * 0.1, 0.7);
     
     return `
-        <div class="movie-card cursor-pointer group" onclick="openModal('${encodeURIComponent(JSON.stringify(movie))}')">
-            <div class="relative rounded-xl overflow-hidden bg-secondary">
+        <div class="movie-card" onclick="openModal('${movieData}')" style="animation-delay: ${delay}s">
+            <div class="poster-wrapper">
                 <img src="${poster}" alt="${title}" 
-                     class="w-full aspect-[2/3] object-cover group-hover:scale-105 transition duration-300"
-                     onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
-                
-                <!-- Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition">
-                    <div class="absolute bottom-0 left-0 right-0 p-4">
-                        <button class="w-full bg-accent hover:bg-accentHover text-primary font-semibold py-2 rounded-lg transition">
-                            <i class="fas fa-play mr-2"></i>Watch
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Badges -->
-                <div class="absolute top-2 left-2 flex gap-2">
-                    <span class="bg-accent text-primary text-xs font-bold px-2 py-1 rounded">${quality}</span>
-                </div>
-                <div class="absolute top-2 right-2">
-                    <span class="bg-black/60 backdrop-blur-sm text-white text-xs px-2 py-1 rounded flex items-center gap-1">
-                        <i class="fas fa-star text-yellow-400"></i>${rating}
-                    </span>
-                </div>
+                     onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'" loading="lazy">
             </div>
-            
-            <div class="mt-3">
-                <h3 class="font-semibold text-sm line-clamp-2 group-hover:text-accent transition">${title}</h3>
-                <p class="text-xs text-gray-400 mt-1 line-clamp-1">${categories}</p>
+            <div class="movie-info">
+                <h3 class="movie-title">${title}</h3>
+                <div class="movie-meta">
+                    <span>${categories.split(',')[0] || 'Movie'}</span>
+                    <span class="rating-badge">⭐ ${rating}</span>
+                </div>
             </div>
         </div>
     `;
@@ -152,7 +160,7 @@ function loadMore() {
 
 // Load by genre
 function loadByGenre(genre) {
-    setActiveGenre(genre);
+    setActiveTag(genre);
     loadMovies(`genre/${genre}`, 1, true);
 }
 
@@ -175,6 +183,7 @@ function searchMovies() {
     if (filtered.length > 0) {
         movieGrid.innerHTML = '';
         renderMovies(filtered);
+        loadMoreContainer.style.display = 'none';
     } else {
         // Try API search
         fetch(`${API_BASE}/search?q=${encodeURIComponent(query)}`)
@@ -184,8 +193,9 @@ function searchMovies() {
                 movieGrid.innerHTML = '';
                 if (movies.length > 0) {
                     renderMovies(movies);
+                    loadMoreContainer.style.display = 'none';
                 } else {
-                    emptyState.classList.remove('hidden');
+                    emptyState.style.display = 'block';
                 }
             })
             .catch(err => console.error(err));
@@ -193,51 +203,46 @@ function searchMovies() {
 }
 
 // Open movie modal
-function openModal(movieJson) {
-    const movie = JSON.parse(decodeURIComponent(movieJson));
+function openModal(movieData) {
+    const movie = JSON.parse(decodeURIComponent(movieData));
     
     modalContent.innerHTML = `
-        <div class="relative">
-            <img src="${movie.poster || 'https://via.placeholder.com/600x400'}" 
-                 class="w-full h-64 object-cover rounded-t-2xl"
-                 onerror="this.src='https://via.placeholder.com/600x400?text=No+Image'">
-            <button onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center transition">
-                <i class="fas fa-times"></i>
-            </button>
+        <div class="modal-header">
+            <img src="${movie.poster || 'https://via.placeholder.com/800x400?text=No+Image'}" 
+                 alt="${movie.title}" onerror="this.src='https://via.placeholder.com/800x400?text=No+Image'">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
         </div>
-        <div class="p-6">
-            <h2 class="text-2xl font-bold mb-2">${movie.title || 'Unknown'}</h2>
-            <div class="flex items-center gap-4 mb-4">
-                <span class="bg-accent text-primary text-sm font-bold px-3 py-1 rounded">${movie.quality || 'HD'}</span>
-                <span class="flex items-center gap-1 text-yellow-400">
-                    <i class="fas fa-star"></i>${movie.rating || 'N/A'}
-                </span>
+        <div class="modal-body">
+            <h2 class="modal-title">${movie.title || 'Unknown'}</h2>
+            <div class="modal-meta">
+                <span class="rating"><i class="fas fa-star"></i> ${movie.rating || 'N/A'}</span>
+                <span><i class="fas fa-film"></i> ${movie.quality || 'HD'}</span>
+                <span><i class="fas fa-tags"></i> ${movie.categories || 'Movie'}</span>
             </div>
-            <p class="text-gray-400 mb-4">${movie.categories || 'No categories'}</p>
-            <a href="${movie.downloadLink || movie.options?.url || '#'}" target="_blank" 
-               class="inline-block w-full text-center bg-accent hover:bg-accentHover text-primary font-semibold py-3 rounded-xl transition">
-                <i class="fas fa-play mr-2"></i>Watch Now
-            </a>
+            <div class="modal-actions">
+                <a href="${movie.downloadLink || movie.options?.url || '#'}" target="_blank" class="watch-btn">
+                    <i class="fas fa-play"></i> Watch Now
+                </a>
+            </div>
         </div>
     `;
     
-    movieModal.classList.remove('hidden');
-    movieModal.classList.add('flex');
+    movieModal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
 // Close modal
 function closeModal() {
-    movieModal.classList.add('hidden');
-    movieModal.classList.remove('flex');
+    movieModal.classList.remove('active');
     document.body.style.overflow = '';
 }
 
-// Set active genre
-function setActiveGenre(genre) {
-    document.querySelectorAll('.genre-tag').forEach(tag => {
+// Set active tag
+function setActiveTag(selectedGenre) {
+    document.querySelectorAll('.tag').forEach(tag => {
         tag.classList.remove('active');
-        if (tag.textContent.toLowerCase() === genre || (genre === 'latest' && tag.textContent === 'All')) {
+        const tagText = tag.textContent.toLowerCase();
+        if (tagText === selectedGenre || (selectedGenre === 'latest' && tagText === 'all')) {
             tag.classList.add('active');
         }
     });
@@ -246,7 +251,7 @@ function setActiveGenre(genre) {
 // Update section title
 function updateSectionTitle(endpoint) {
     if (endpoint === 'latest') {
-        sectionTitle.textContent = 'Latest Updates';
+        sectionTitle.textContent = 'Film Terbaru';
     } else if (endpoint.startsWith('genre/')) {
         const genre = endpoint.split('/')[1];
         sectionTitle.textContent = `${genre.charAt(0).toUpperCase() + genre.slice(1)} Movies`;
@@ -258,11 +263,11 @@ function updateSectionTitle(endpoint) {
 // Show loading
 function showLoading(show) {
     if (show) {
-        loadingState.classList.remove('hidden');
+        loadingState.style.display = 'block';
         loadMoreBtn.disabled = true;
         loadMoreBtn.textContent = 'Loading...';
     } else {
-        loadingState.classList.add('hidden');
+        loadingState.style.display = 'none';
         loadMoreBtn.disabled = false;
         loadMoreBtn.textContent = 'Load More Movies';
     }
@@ -270,7 +275,7 @@ function showLoading(show) {
 
 // Show error
 function showError() {
-    emptyState.classList.remove('hidden');
+    emptyState.style.display = 'block';
     emptyState.querySelector('h3').textContent = 'Failed to load movies';
     emptyState.querySelector('p').textContent = 'Please try again later';
 }

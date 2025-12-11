@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LK21 Vibe - Premium Movie Stream</title>
-    <link rel="icon" type="image/svg+xml" href="/logo.svg">
+    <title>Film Collection - LK21 Vibe</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar scrolled" id="navbar">
         <a href="/" class="logo">
             <svg width="40" height="40" viewBox="0 0 50 50">
                 <rect width="50" height="50" rx="10" fill="#D4A017"/>
@@ -23,46 +22,28 @@
             <span>LK21 Vibe</span>
         </a>
         <div class="nav-links">
-            <a href="/" class="nav-link active"><i class="fas fa-home"></i> Home</a>
-            <a href="/films.html" class="nav-link"><i class="fas fa-film"></i> Film</a>
+            <a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="/films.html" class="nav-link active"><i class="fas fa-film"></i> Film</a>
             <a href="/about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
             <a href="/contact.html" class="nav-link"><i class="fas fa-user"></i> Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>Premium Movie Streaming</h1>
-            <p>Temukan film favorit Anda dengan kualitas terbaik. Streaming gratis tanpa batas.</p>
-        </div>
-    </section>
-
-    <!-- Floating Search -->
-    <div class="floating-search" id="floatingSearch">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="searchInput" placeholder="Cari film favorit Anda..." 
-               onfocus="expandSearch()" onblur="collapseSearch()">
-        <button onclick="searchMovies()" class="search-btn">
-            <i class="fas fa-arrow-right"></i>
-        </button>
-    </div>
+    <!-- Spacer for fixed navbar -->
+    <div style="height: 80px;"></div>
 
     <!-- Main Content -->
-    <main class="container">
-        <section id="latest-section">
+    <main class="container" style="margin-top: 0;">
+        <section>
             <div class="section-header">
-                <h2 id="sectionTitle">Film Terbaru</h2>
+                <h2 id="sectionTitle">All Movies</h2>
                 <div class="tags-container">
                     <div class="tags" id="genreTags">
                         <span class="tag active" onclick="loadMovies('latest')">All</span>
                         <span class="tag" onclick="loadByGenre('action')">Action</span>
                         <span class="tag" onclick="loadByGenre('adventure')">Adventure</span>
                         <span class="tag" onclick="loadByGenre('animation')">Animation</span>
-                        <span class="tag" onclick="loadByGenre('biography')">Biography</span>
                         <span class="tag" onclick="loadByGenre('comedy')">Comedy</span>
-                        <span class="tag" onclick="loadByGenre('crime')">Crime</span>
                         <span class="tag" onclick="loadByGenre('drama')">Drama</span>
                         <span class="tag" onclick="loadByGenre('horror')">Horror</span>
                         <span class="tag" onclick="loadByGenre('romance')">Romance</span>
@@ -72,42 +53,23 @@
                 </div>
             </div>
 
-            <!-- Movie Grid -->
-            <div class="movie-grid" id="movieGrid">
-                <!-- Movies loaded here -->
-            </div>
-
-            <!-- Loading State -->
-            <div class="loading-spinner" id="loadingState" style="display: none;">
-                <i class="fas fa-spinner fa-spin"></i>
-            </div>
-
-            <!-- Empty State -->
+            <div class="movie-grid" id="movieGrid"></div>
+            <div class="loading-spinner" id="loadingState" style="display: none;"><i class="fas fa-spinner fa-spin"></i></div>
             <div class="no-results" id="emptyState" style="display: none;">
                 <i class="fas fa-search"></i>
-                <h3>No movies found matching your search</h3>
-                <p>Try different keywords or browse all movies</p>
+                <h3>No movies found</h3>
+                <p>Try a different category</p>
             </div>
-
-            <!-- Load More -->
             <div class="load-more-container" id="loadMoreContainer">
-                <button class="primary-btn" id="loadMoreBtn" onclick="loadMore()">
-                    Load More Movies
-                </button>
+                <button class="primary-btn" id="loadMoreBtn" onclick="loadMore()">Load More Movies</button>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 LK21 Vibe. For educational purposes only.</p>
-    </footer>
+    <footer><p>&copy; 2025 LK21 Vibe. For educational purposes only.</p></footer>
 
-    <!-- Movie Detail Modal -->
     <div class="modal-overlay" id="movieModal">
-        <div class="modal-content" id="modalContent">
-            <!-- Modal content loaded here -->
-        </div>
+        <div class="modal-content" id="modalContent"></div>
     </div>
 
     <script src="/js/app.js"></script>

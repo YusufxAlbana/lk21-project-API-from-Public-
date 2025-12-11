@@ -4,88 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - LK21 Vibe</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { primary: '#0f172a', secondary: '#1e293b', accent: '#d4a853' }
-                }
-            }
-        }
-    </script>
-    <style>body { font-family: 'Outfit', sans-serif; }</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .about-container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .about-card { background: var(--dark-grey); border-radius: 16px; padding: 2.5rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.1); }
+        .about-card h2 { color: var(--primary); margin-bottom: 1rem; font-size: 1.5rem; }
+        .about-card p { color: var(--light-grey); line-height: 1.8; margin-bottom: 1rem; }
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .tech-item { background: var(--dark); padding: 1.25rem; border-radius: 12px; display: flex; align-items: center; gap: 0.75rem; transition: all 0.3s; border: 1px solid transparent; }
+        .tech-item:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .tech-item i { font-size: 1.8rem; }
+        .tech-item span { font-weight: 500; }
+        .fa-html5 { color: #E44D26; }
+        .fa-css3-alt { color: #264DE4; }
+        .fa-js { color: #F7DF1E; }
+        .fa-node-js { color: #68A063; }
+    </style>
 </head>
-<body class="bg-primary text-white min-h-screen">
-    <!-- Navbar -->
-    <nav class="bg-secondary/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/" class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
-                    <i class="fas fa-film text-primary"></i>
-                </div>
-                <span class="text-xl font-bold">LK21 Vibe</span>
-            </a>
-            <div class="flex items-center gap-6">
-                <a href="/" class="hover:text-accent transition"><i class="fas fa-home mr-2"></i>Home</a>
-                <a href="/about.html" class="text-accent font-medium"><i class="fas fa-info-circle mr-2"></i>About</a>
-                <a href="/contact.html" class="hover:text-accent transition"><i class="fas fa-user mr-2"></i>Contact</a>
-            </div>
+<body>
+    <nav class="navbar scrolled">
+        <a href="/" class="logo">
+            <svg width="40" height="40" viewBox="0 0 50 50"><rect width="50" height="50" rx="10" fill="#D4A017"/><rect x="8" y="12" width="34" height="26" rx="3" fill="#0A1A2F"/><polygon points="22,17 38,25 22,33" fill="#D4A017"/></svg>
+            <span>LK21 Vibe</span>
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="/films.html" class="nav-link"><i class="fas fa-film"></i> Film</a>
+            <a href="/about.html" class="nav-link active"><i class="fas fa-info-circle"></i> About</a>
+            <a href="/contact.html" class="nav-link"><i class="fas fa-user"></i> Contact</a>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-4 py-16">
-        <h1 class="text-4xl font-bold text-center mb-8">About LK21 Vibe</h1>
-        
-        <div class="bg-secondary rounded-2xl p-8 mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-accent">Project Overview</h2>
-            <p class="text-gray-300 leading-relaxed mb-4">
-                LK21 Vibe adalah platform streaming film yang dibangun untuk tujuan edukasi. 
-                Project ini mendemonstrasikan penggunaan API, web scraping, dan modern web development.
-            </p>
-            <p class="text-gray-300 leading-relaxed">
-                Dibangun dengan HTML, Tailwind CSS, dan JavaScript vanilla untuk frontend, 
-                serta Node.js/Express untuk backend API.
-            </p>
+    <div style="height: 100px;"></div>
+
+    <main class="about-container">
+        <div class="about-card" style="text-align: center;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">About LK21 Vibe</h1>
+            <p style="font-size: 1.1rem;">Premium Movie Streaming Platform</p>
         </div>
 
-        <div class="bg-secondary rounded-2xl p-8">
-            <h2 class="text-2xl font-semibold mb-4 text-accent">Tech Stack</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="flex items-center gap-3 p-4 bg-primary rounded-xl">
-                    <i class="fab fa-html5 text-3xl text-orange-500"></i>
-                    <span>HTML5</span>
-                </div>
-                <div class="flex items-center gap-3 p-4 bg-primary rounded-xl">
-                    <i class="fab fa-css3-alt text-3xl text-blue-500"></i>
-                    <span>Tailwind CSS</span>
-                </div>
-                <div class="flex items-center gap-3 p-4 bg-primary rounded-xl">
-                    <i class="fab fa-js text-3xl text-yellow-400"></i>
-                    <span>JavaScript</span>
-                </div>
-                <div class="flex items-center gap-3 p-4 bg-primary rounded-xl">
-                    <i class="fab fa-node-js text-3xl text-green-500"></i>
-                    <span>Node.js</span>
-                </div>
-                <div class="flex items-center gap-3 p-4 bg-primary rounded-xl">
-                    <i class="fas fa-server text-3xl text-purple-500"></i>
-                    <span>Express</span>
-                </div>
-                <div class="flex items-center gap-3 p-4 bg-primary rounded-xl">
-                    <i class="fas fa-cloud text-3xl text-cyan-500"></i>
-                    <span>Vercel</span>
-                </div>
+        <div class="about-card">
+            <h2><i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i> Project Overview</h2>
+            <p>LK21 Vibe adalah platform streaming film yang dibangun untuk tujuan edukasi. Project ini mendemonstrasikan penggunaan API, web scraping, dan modern web development.</p>
+            <p>Dibangun dengan HTML, CSS, dan JavaScript vanilla untuk frontend, serta Node.js/Express untuk backend API.</p>
+        </div>
+
+        <div class="about-card">
+            <h2><i class="fas fa-code" style="margin-right: 0.5rem;"></i> Tech Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item"><i class="fab fa-html5"></i><span>HTML5</span></div>
+                <div class="tech-item"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+                <div class="tech-item"><i class="fab fa-js"></i><span>JavaScript</span></div>
+                <div class="tech-item"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+                <div class="tech-item"><i class="fas fa-server" style="color: #7952b3;"></i><span>Express</span></div>
+                <div class="tech-item"><i class="fas fa-cloud" style="color: #00C7B7;"></i><span>Vercel</span></div>
             </div>
+        </div>
+
+        <div class="about-card">
+            <h2><i class="fas fa-star" style="margin-right: 0.5rem;"></i> Features</h2>
+            <ul style="color: var(--light-grey); line-height: 2; padding-left: 1.5rem;">
+                <li>Browse latest movies with real-time API</li>
+                <li>Filter movies by genre</li>
+                <li>Search functionality</li>
+                <li>Responsive design for all devices</li>
+                <li>Beautiful animations and transitions</li>
+            </ul>
         </div>
     </main>
 
-    <footer class="bg-secondary border-t border-white/10 py-8 mt-12">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-gray-400">&copy; 2025 LK21 Vibe. For educational purposes only.</p>
-        </div>
-    </footer>
+    <footer><p>&copy; 2025 LK21 Vibe. For educational purposes only.</p></footer>
 </body>
 </html>
