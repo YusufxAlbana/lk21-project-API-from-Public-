@@ -1,4 +1,14 @@
-import api from "../config/api.js";
+import axios from "axios";
+
+const baseURL = process.env.LK21_BASE_URL || "https://tv7.lk21official.cc";
+
+const api = axios.create({
+  baseURL,
+  timeout: 15000,
+  headers: {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+  },
+});
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
