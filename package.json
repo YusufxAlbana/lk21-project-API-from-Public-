@@ -2,14 +2,10 @@
   "name": "api-lk21",
   "version": "1.0.0",
   "description": "API Untuk mengambil data-data movie LK21",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "npm run build && nodemon server.js",
-    "server": "nodemon server.js",
-    "client": "npm run build --prefix client",
-    "build": "npm install --prefix client && npm run build --prefix client",
-    "vercel-build": "npm install --prefix client && npm run build --prefix client",
+    "dev": "nodemon server.js",
     "start": "node server.js"
   },
   "author": "devnazir",
@@ -29,9 +25,5 @@
     "#routes/*": "./routes/*.js",
     "#config/*": "./config/*.js",
     "#utils/*": "./utils/*.js"
-  },
-  "devDependencies": {
-    "concurrently": "^9.2.1",
-    "nodemon": "^3.1.11"
   }
 }
