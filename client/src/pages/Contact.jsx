@@ -84,8 +84,8 @@ function Contact() {
                             <span className="skill-tag"><i className="fab fa-react"></i> React JS</span>
                             <span className="skill-tag"><i className="fab fa-node-js"></i> Node.js</span>
                             <span className="skill-tag"><i className="fab fa-js"></i> JavaScript</span>
-                            <span className="skill-tag"><i className="fab fa-html5"></i> HTML5</span>
-                            <span className="skill-tag"><i className="fab fa-css3-alt"></i> CSS3</span>
+                            <span className="skill-tag"><i className="fab fa-html5"></i> HTML</span>
+                            <span className="skill-tag"><i className="fab fa-css3-alt"></i> CSS</span>
                             <span className="skill-tag"><i className="fas fa-database"></i> API Integration</span>
                         </div>
                     </div>
