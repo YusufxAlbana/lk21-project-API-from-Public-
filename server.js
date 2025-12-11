@@ -30,30 +30,18 @@ app.get("/status", async (req, res) => {
   }
 });
 
-// Serve React build files (production)
-// In Vercel serverless, __dirname might differ from project root
-const distPath = path.join(__dirname, "client", "dist");
-const altDistPath = path.join(process.cwd(), "client", "dist");
+// Serve static files from public folder
+const publicPath = path.join(__dirname, "public");
 
-// Try both paths for Vercel compatibility
-const actualDistPath = fs.existsSync(distPath) ? distPath : altDistPath;
+app.use(express.static(publicPath));
 
-// Always set up static file serving - Vercel builds the client first
-app.use(express.static(actualDistPath));
-
-// Fallback: serve React app for all other routes (SPA routing)
+// SPA fallback - serve index.html for all other routes
 app.get("*", (req, res) => {
-  const indexPath = path.join(actualDistPath, "index.html");
+  const indexPath = path.join(publicPath, "index.html");
   if (fs.existsSync(indexPath)) {
     res.sendFile(indexPath);
   } else {
-    res.status(404).json({ 
-      error: "Frontend not built", 
-      hint: "Run 'npm run build' first",
-      distPath: actualDistPath,
-      __dirname: __dirname,
-      cwd: process.cwd()
-    });
+    res.status(404).json({ error: "Frontend not found" });
   }
 });
 

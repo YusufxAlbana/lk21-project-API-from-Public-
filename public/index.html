@@ -4,87 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LK21 Vibe - Premium Movie Stream</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#1e293b',
+                        accent: '#d4a853',
+                        accentHover: '#e5b963'
+                    },
+                    fontFamily: {
+                        outfit: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+        .movie-card:hover { transform: translateY(-8px); }
+        .movie-card { transition: transform 0.3s ease; }
+        .genre-tag.active { background: linear-gradient(135deg, #d4a853, #e5b963); color: #0f172a; }
+        .skeleton { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+    </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="logo.png" alt="LK21 Vibe" style="height: 40px; margin-right: 10px; vertical-align: middle;">
-            LK21<span>Vibe</span>
-        </div>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search movies...">
-            <button id="searchBtn"><i class="fas fa-search"></i></button>
+<body class="bg-primary text-white min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-secondary/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
+                    <i class="fas fa-film text-primary"></i>
+                </div>
+                <span class="text-xl font-bold">LK21 Vibe</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6">
+                <a href="/" class="text-accent font-medium"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="/films.html" class="hover:text-accent transition"><i class="fas fa-film mr-2"></i>Film</a>
+                <a href="/about.html" class="hover:text-accent transition"><i class="fas fa-info-circle mr-2"></i>About</a>
+                <a href="/contact.html" class="hover:text-accent transition"><i class="fas fa-user mr-2"></i>Contact</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="Cari film favorit Anda..." 
+                           class="bg-primary/50 border border-white/20 rounded-full px-4 py-2 pl-10 w-64 focus:outline-none focus:border-accent transition">
+                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <button onclick="searchMovies()" class="bg-accent hover:bg-accentHover text-primary rounded-full w-10 h-10 flex items-center justify-center transition">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
     </nav>
 
-    <header class="hero" id="hero">
-        <div class="hero-content">
-            <h1>Discover Infinite Entertainment</h1>
-            <p>Stream the latest movies and series in HD.</p>
+    <!-- Hero Section -->
+    <section class="relative h-80 bg-gradient-to-b from-secondary to-primary overflow-hidden">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Premium Movie Streaming</h1>
+            <p class="text-gray-300 text-lg max-w-2xl">Temukan film favorit Anda dengan kualitas terbaik</p>
         </div>
-        <div class="hero-overlay"></div>
-    </header>
+    </section>
 
-    <main class="container">
-        <section id="latest-section">
-            <div class="section-header">
-                <h2>Latest Updates</h2>
-                <div class="tags-container">
-                    <div class="tags">
-                        <span class="tag active">All</span>
-                        <span class="tag">Action</span>
-                        <span class="tag">Adventure</span>
-                        <span class="tag">Animation</span>
-                        <span class="tag">Biography</span>
-                        <span class="tag">Comedy</span>
-                        <span class="tag">Crime</span>
-                        <span class="tag">Documentary</span>
-                        <span class="tag">Drama</span>
-                        <span class="tag">Family</span>
-                        <span class="tag">Fantasy</span>
-                        <span class="tag">History</span>
-                        <span class="tag">Horror</span>
-                        <span class="tag">Music</span>
-                        <span class="tag">Mystery</span>
-                        <span class="tag">Romance</span>
-                        <span class="tag">Sci-Fi</span>
-                        <span class="tag">Sport</span>
-                        <span class="tag">Thriller</span>
-                        <span class="tag">War</span>
-                        <span class="tag">Western</span>
-                    </div>
-                </div>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+            <h2 class="text-2xl font-bold flex items-center gap-3">
+                <span class="w-1 h-8 bg-accent rounded-full"></span>
+                <span id="sectionTitle">Latest Updates</span>
+            </h2>
+            <!-- Genre Tags -->
+            <div class="flex flex-wrap gap-2" id="genreTags">
+                <button onclick="loadMovies('latest')" class="genre-tag active px-4 py-2 rounded-full border border-white/20 hover:border-accent transition text-sm">All</button>
+                <button onclick="loadByGenre('action')" class="genre-tag px-4 py-2 rounded-full border border-white/20 hover:border-accent transition text-sm">Action</button>
+                <button onclick="loadByGenre('adventure')" class="genre-tag px-4 py-2 rounded-full border border-white/20 hover:border-accent transition text-sm">Adventure</button>
+                <button onclick="loadByGenre('animation')" class="genre-tag px-4 py-2 rounded-full border border-white/20 hover:border-accent transition text-sm">Animation</button>
+                <button onclick="loadByGenre('comedy')" class="genre-tag px-4 py-2 rounded-full border border-white/20 hover:border-accent transition text-sm">Comedy</button>
+                <button onclick="loadByGenre('horror')" class="genre-tag px-4 py-2 rounded-full border border-white/20 hover:border-accent transition text-sm">Horror</button>
+                <button onclick="loadByGenre('drama')" class="genre-tag px-4 py-2 rounded-full border border-white/20 hover:border-accent transition text-sm">Drama</button>
             </div>
-            <div class="movie-grid" id="movieGrid">
-                <!-- Movies will be loaded here -->
-                <div class="loading-spinner"></div>
-            </div>
-            
-            <div class="load-more-container">
-                <button id="loadMoreBtn" class="primary-btn">Load More Movies</button>
-            </div>
-        </section>
+        </div>
+
+        <!-- Movie Grid -->
+        <div id="movieGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            <!-- Movies will be loaded here -->
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="hidden text-center py-8">
+            <div class="inline-block w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
+            <p class="mt-2 text-gray-400">Loading movies...</p>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-16">
+            <i class="fas fa-search text-6xl text-accent/50 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">No movies found matching your search</h3>
+            <p class="text-gray-400">Try different keywords or browse all movies</p>
+        </div>
+
+        <!-- Load More Button -->
+        <div id="loadMoreContainer" class="text-center mt-8">
+            <button onclick="loadMore()" id="loadMoreBtn" class="bg-accent hover:bg-accentHover text-primary font-semibold px-8 py-3 rounded-full transition">
+                Load More Movies
+            </button>
+        </div>
     </main>
 
-    <!-- Movie Detail Modal -->
-    <div id="movieModal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="closeModal" class="close-btn">&times;</button>
-            <div id="modalBody" class="modal-body">
-                <!-- Content injected via JS -->
-                 <div class="loading-spinner"></div>
-            </div>
+    <!-- Footer -->
+    <footer class="bg-secondary border-t border-white/10 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-400">&copy; 2025 LK21 Vibe. For educational purposes only.</p>
+        </div>
+    </footer>
+
+    <!-- Movie Modal -->
+    <div id="movieModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-secondary rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div id="modalContent"></div>
         </div>
     </div>
 
-    <footer>
-        <p>&copy; 2025 LK21 Vibe. For educational purposes only.</p>
-    </footer>
-
-    <script src="script.js"></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>
