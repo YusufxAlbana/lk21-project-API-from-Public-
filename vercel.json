@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "buildCommand": "npm run vercel-build",
+    "outputDirectory": "client/dist",
+    "rewrites": [
+        {
+            "source": "/api/v1/:path*",
+            "destination": "/api/v1/:path*"
+        },
+        {
+            "source": "/status",
+            "destination": "/api/status"
+        }
+    ]
+}
