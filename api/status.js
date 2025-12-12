@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   
   try {
-    const response = await api.get("/");
+    const response = await api.get("/latest");
     res.json({ 
       statusServerLK21: response.status, 
       statusText: response.statusText 
