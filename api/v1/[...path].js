@@ -5,7 +5,7 @@ import jsdom from "jsdom";
 const { JSDOM } = jsdom;
 
 // API Config
-const baseURL = process.env.LK21_BASE_URL || "https://lk21official.blog";
+const baseURL = process.env.LK21_BASE_URL || "https://tv.lk21official.love";
 
 const api = axios.create({
   baseURL,
