@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = process.env.LK21_BASE_URL || "https://tv7.lk21official.cc";
+const baseURL = process.env.LK21_BASE_URL || "https://lk21official.blog";
 
 const api = axios.create({
   baseURL,
